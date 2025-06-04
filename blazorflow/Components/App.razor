@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="blazorflow.styles.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <div id="carousel">
+        <div class="carousel-item">Slide 1</div>
+        <div class="carousel-item">Slide 2</div>
+        <div class="carousel-item">Slide 3</div>
+        <div class="carousel-item">Slide 4</div>
+    </div>
+    <div id="slideText"></div>
+    <div id="slideText2"></div>
+
+    <script>
+        let idx = 0;
+        const track = document.getElementById("carousel");
+        const slides = track.querySelectorAll(".carousel-item");
+        const caption = document.getElementById("slideText");
+        const caption2 = document.getElementById("slideText2");
+
+        const captions = [
+            "Rumianki – Cudowne Kwiaty Natury",
+            "Tulipany Białe – Symbol Czystości, Pokoju i Elegancji",
+            "Białe Róże – Królewskie Kwiaty Czystości",
+            "Białe Azalie – Elegancja, Czystość"
+        ];
+
+        const captions2 = [
+          "Rumianek (łac. Matricaria chamomilla) to jedna z najbardziej rozpoznawalnych i cenionych roślin leczniczych w Europie oraz na całym świecie. Od wieków znany jest nie tylko ze swojego delikatnego, przyjemnego zapachu i pięknych, białych płatków z żółtym środkiem, ale przede wszystkim ze swoich niezwykłych właściwości zdrowotnych, kosmetycznych i uspokajających. Rumianek jest symbolem łagodności, naturalnego ukojenia oraz siły płynącej z natury.<br><br>W ziołolecznictwie rumianek odgrywa istotną rolę jako roślina wspomagająca trawienie, działająca przeciwzapalnie, przeciwbakteryjnie oraz przeciwskurczowo. Napary z rumianku wykorzystywane są przy problemach żołądkowych, wzdęciach, a także jako środek łagodzący stres i napięcie nerwowe. Jego kojące działanie sprawia, że często znajduje się w herbatach relaksacyjnych oraz preparatach na bezsenność.<br><br>Rumianek jest również popularnym składnikiem kosmetyków – toników, kremów, szamponów i maseczek. Działa łagodząco na skórę, zmniejsza podrażnienia, a także wspomaga regenerację naskórka. Dzięki zawartości naturalnych olejków eterycznych, flawonoidów i kumaryn, rumianek posiada silne działanie antyoksydacyjne i przeciwstarzeniowe.<br><br>Roślina ta rośnie dziko na łąkach, polach i przy drogach, ale równie często uprawiana jest w ogrodach i na plantacjach. Kwitnie od maja do września, a jej delikatne kwiaty przyciągają nie tylko ludzi, ale i pszczoły oraz inne owady zapylające.<br><br>Rumianek to także roślina, która odgrywała ważną rolę w kulturze ludowej – był używany w rytuałach ochronnych, jako   symbol czystości oraz miłości. W wielu regionach Polski mówi się, że rumianek przynosi spokój, równowagę i zdrowie – zarówno ciału, jak i duszy.",
+          "Tulipany białe to jedne z najbardziej zachwycających i delikatnych kwiatów, jakie stworzyła natura. Ich elegancka forma, śnieżnobiała barwa i subtelny zapach sprawiają, że są one nie tylko ozdobą ogrodów, ale także silnym symbolem czystości, niewinności, pokoju i duchowej harmonii. W kulturze europejskiej białe tulipany od wieków były wykorzystywane podczas ważnych ceremonii, takich jak śluby, chrzty czy uroczystości upamiętniające. Ich obecność zawsze niesie ze sobą poczucie świeżości, nowego początku oraz delikatnego piękna.<br><br>W przeciwieństwie do innych kolorów tulipanów, które wyrażają pasję, przyjaźń czy podziw, białe tulipany niosą przesłanie subtelniejsze i głębsze. To kwiaty, które nie krzyczą barwą, lecz emanują spokojem, klasą i wewnętrzną równowagą. Są częstym wyborem osób ceniących prostotę i estetykę w najczystszej postaci.<br><br>Z botanicznego punktu widzenia tulipan należy do rodziny liliowatych (Liliaceae) i pochodzi z obszarów Azji Środkowej, jednak największą sławę zdobył w Holandii, gdzie stał się narodowym symbolem. Białe odmiany tulipanów są efektem wieloletnich prac hodowlanych i dzisiaj można wybierać spośród setek pięknych wariantów, różniących się wysokością, kształtem płatków czy czasem kwitnienia.<br><br>Białe tulipany znakomicie komponują się z innymi kwiatami w bukietach, nadając im lekkości i harmonii. Często łączy się je z różami, eustomami, frezjami czy zielonymi dodatkami. Ich uniwersalność sprawia, że pasują zarówno do klasycznych, jak i nowoczesnych aranżacji florystycznych. Co więcej, są znakomitym wyborem do dekoracji wnętrz – zarówno mieszkań, jak i miejsc pracy – nadając przestrzeniom atmosferę spokoju i czystości.",
+          "Białe róże od wieków fascynują ludzi na całym świecie swoją niezwykłą urodą, symboliką i uniwersalnością. Są kwiatami szlachetnymi, pełnymi klasy i subtelności. W przeciwieństwie do czerwonych, które symbolizują namiętną miłość, białe róże reprezentują czystość, niewinność, duchową miłość oraz pokój. Ich obecność w ogrodach, bukietach i dekoracjach wnosi spokój, elegancję i ponadczasowe piękno.<br><br>W wielu kulturach biała róża uznawana jest za symbol doskonałości i boskiego piękna. Jest kwiatem anielskim – delikatnym, ale jednocześnie silnym i trwałym. W tradycjach ślubnych to właśnie białe róże najczęściej zdobią bukiety panny młodej – jako znak nowego początku, wierności oraz szczerości uczuć. Ich uniwersalność sprawia, że są też wykorzystywane podczas uroczystości religijnych, chrzcin, komunii, a także w chwilach pożegnań – niosąc przesłanie wiecznego spokoju i nadziei.<br><br>Botanicznie rzecz biorąc, róża (Rosa) to roślina należąca do rodziny różowatych (Rosaceae). Białe odmiany są wynikiem starannej selekcji i hodowli, dzięki czemu dzisiaj możemy podziwiać setki różnych gatunków i hybryd. Istnieją zarówno róże pnące, wielkokwiatowe, jak i miniaturowe – każda z nich może mieć biały kolor, różniący się odcieniem od śnieżnobiałego po lekko kremowy czy perłowy.<br><br>Uprawa białych róż wymaga nieco troski, ale nagrodą są ich przepiękne kwiaty o intensywnym, lecz delikatnym zapachu. Róże najlepiej rosną w miejscach słonecznych, z żyzną i dobrze przepuszczalną glebą. Regularne przycinanie i podlewanie to klucz do zdrowych i bujnie kwitnących roślin. Dobrze zadbane róże mogą cieszyć oko przez wiele lat, stając się ozdobą ogrodu lub tarasu.",
+          "Białe azalie to jedne z najbardziej czarujących i subtelnych kwiatów, które od wieków urzekają ludzi na całym świecie. Ich delikatne płatki, niemal przejrzyste w świetle poranka, niosą w sobie spokój, wdzięk oraz ponadczasową klasę. Nie bez powodu nazywane są kwiatami ciszy i duchowej równowagi – ich obecność koi zmysły i dodaje przestrzeniom elegancji oraz harmonii.<br><br>Azalie należą do rodziny wrzosowatych (Ericaceae), a ich piękno objawia się najpełniej wiosną, gdy krzewy pokrywają się setkami drobnych, ale zachwycających kwiatów. Białe odmiany azalii symbolizują czystość intencji, niewinność, szlachetność i pokój. To kwiaty idealne do ogrodów japońskich, medytacyjnych przestrzeni oraz miejsc, gdzie człowiek pragnie odnaleźć balans między naturą a sobą.<br><br>W kulturze Dalekiego Wschodu azalia uznawana jest za symbol kobiecości, łagodności i piękna skrywanego wewnątrz. Biała wersja tej rośliny ma dodatkowo znaczenie duchowe – często sadzona jest w miejscach refleksji, przy świątyniach lub jako ozdoba domowych altan.<br><br>Azalie są również roślinami wymagającymi, ale odwdzięczają się spektakularnym kwitnieniem. Lubią kwaśną glebę, półcień oraz umiarkowane podlewanie. Ich pielęgnacja uczy cierpliwości i szacunku do rytmu natury. Białe kwiaty, gdy zakwitną, wyglądają jak zawieszone w powietrzu motyle – lekkie, eteryczne, niemal nierzeczywiste.<br><br>W florystyce białe azalie wykorzystywane są w kompozycjach ślubnych, romantycznych oraz żałobnych. Ich neutralna, a jednocześnie elegancka barwa sprawia, że idealnie komponują się zarówno z innymi kwiatami, jak i jako samodzielna dekoracja. Są symbolem czystej miłości, wdzięczności i wiecznego piękna."
+        ];
+
+        function updateSlide() {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === idx ? "block" : "none";
+            });
+            caption.innerHTML = captions[idx];
+            caption2.innerHTML = captions2[idx];
+        }
+
+        document.getElementById("nextBtn").addEventListener("click", () => {
+            idx = (idx - 1 + slides.length) % slides.length;
+            updateSlide();
+        });
+
+        document.getElementById("prevBtn").addEventListener("click", () => {
+            idx = (idx + 1) % slides.length;
+            updateSlide();
+        });
+
+        updateSlide();
+    </script>
+    <script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>
